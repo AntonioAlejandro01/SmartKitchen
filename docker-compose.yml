@@ -90,6 +90,18 @@ services:
     networks: 
       smkt:
         ipv4_address: 172.0.0.8
+  front:
+    image: antonioalejandro01/smktf-kitchen:1
+    container_name: smktf-kitchen
+    depends_on: 
+      - users
+    expose: 
+      - "80"
+    ports: 
+      - "80:80"
+    networks: 
+      smkt:
+        ipv4_address: 172.0.0.10
 networks:
   smkt:
     driver: bridge
