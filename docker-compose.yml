@@ -9,10 +9,20 @@ services:
     networks:
       smkt:
         ipv4_address: 172.0.0.2
+  mysqlDB:
+    image: mysql:latest
+    container_name: smkt-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'SMKT_USERS'
+      MYSQL_USER: 'smkt'
+      MYSQL_PASSWORD: 'Smkt@123'
+      MYSQL_ROOT_PASSWORD: 'password'
+    networks: 
+      smkt:
+        ipv4_address: 172.0.0.20
   eureka:
-    build:
-      context: ./SMKT_Eureka
-      dockerfile: Dockerfile
+    image: antonioalejandro01/smkt-eureka:1
     container_name: smkt-eureka
     expose:
       - "8761"
@@ -20,9 +30,7 @@ services:
       smkt:
         ipv4_address: 172.0.0.3
   gateway:
-    build:
-      context: ./SMKT_Gateway
-      dockerfile: Dockerfile.compose
+    image: antonioalejandro01/smkt-gateway:1
     container_name: smkt-gateway
     depends_on:
       - eureka
@@ -34,9 +42,7 @@ services:
       smkt:
         ipv4_address: 172.0.0.4
   files:
-    build:
-      context: ./SMKT_Files
-      dockerfile: Dockerfile.compose
+    image: antonioalejandro01/smkt-files:1
     container_name: smkt-files
     depends_on:
       - gateway
@@ -46,9 +52,7 @@ services:
       smkt:
         ipv4_address: 172.0.0.5
   kitchen:
-    build:
-      context: ./SMKT_Kitchen
-      dockerfile: Dockerfile.compose
+    image: antonioalejandro01/smkt-kitchen:1
     container_name: smkt-kitchen
     environment:
       IP_MONGO: "172.0.0.2"
@@ -65,6 +69,27 @@ services:
     networks:
       smkt:
         ipv4_address: 172.0.0.6
+  auth:
+    image: antonioalejandro01/smkt-oauth:1
+    container_name: smkt-oauth
+    depends_on: 
+      - gateway
+    expose: 
+      - "9100"
+    networks: 
+      smkt:
+        ipv4_address: 172.0.0.7
+  users:
+    image: antonioalejandro01/smkt-users:1
+    container_name: smkt-users
+    depends_on: 
+      - gateway
+      - mysqlDB
+    expose: 
+      - "4070"
+    networks: 
+      smkt:
+        ipv4_address: 172.0.0.8
 networks:
   smkt:
     driver: bridge
