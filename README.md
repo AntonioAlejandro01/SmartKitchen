@@ -1,6 +1,17 @@
 # SmartKitchen
 Execute installation.sh or installation for windows
-
+#### Download docker-compose.yml for microservices
+```bash
+curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/master/docker-compose.yml -o ./docker-compose.yml
+```
+#### Run microservices
+```bash
+docker-compose up -d
+```
+#### Run Frontend
+```bash
+docker run -p"80:80" -t antonioalejandro01/smktf-kitchen:1
+```
 <b>Docker and docker-compose is neccesary</b>
 
 ## Microservices
