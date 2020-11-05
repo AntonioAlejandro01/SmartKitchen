@@ -26,6 +26,8 @@ services:
     container_name: smkt-eureka
     expose:
       - "8761"
+    ports: 
+      - "8761:8761"
     networks:
       smkt:
         ipv4_address: 172.0.0.3
