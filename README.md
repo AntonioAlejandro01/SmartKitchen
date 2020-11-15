@@ -1,5 +1,5 @@
 # SmartKitchen
-Execute installation.sh or installation for windows
+
 #### Download docker-compose.yml for microservices
 ```bash
 curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/master/docker-compose.yml -o ./docker-compose.yml
