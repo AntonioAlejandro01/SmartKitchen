@@ -1,4 +1,4 @@
-# SmartKitchen
+# SmartKitchen #DEPRECATED
 
 #### Download docker-compose.yml for microservices
 ```bash
