@@ -15,13 +15,13 @@ curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/main/snap
 #### Download docker-compose.yml LATEST
 
 ```bash
-curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/main/version/latest/docker-compose.yml -o ./docker-compose.yml
+curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/main/versions/latest/docker-compose.yml -o ./docker-compose.yml
 ```
 
 #### Download docker-compose.yml Specific Version
 
 ```bash
-curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/main/version/1.0.0/docker-compose.yml -o ./docker-compose.yml
+curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/main/versions/1.0.0/docker-compose.yml -o ./docker-compose.yml
 ```
 
 #### Run
@@ -33,7 +33,7 @@ docker-compose up -d
 #### Download and run
 
 ```bash
-curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/main/version/1.0.0/docker-compose.yml -o ./docker-compose.yml | docker-compose up -d
+curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/main/versions/1.0.0/docker-compose.yml -o ./docker-compose.yml | docker-compose up -d
 ```
 
 ## Services
