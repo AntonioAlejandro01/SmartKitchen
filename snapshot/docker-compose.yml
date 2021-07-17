@@ -1,0 +1,99 @@
+version: "3"
+
+services:
+    mongoDB:
+        image: mongo:5
+        container_name: smkt-mongo
+        restart: always
+        ports: 
+            - "27017:27017"
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: secret
+        volumes:
+            - mongoDBDataSnapshot:/data/db
+    mysqlDB:
+        image: mysql:8
+        container_name: smkt-mysql
+        restart: always
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: 'SMKT_USERS'
+            MYSQL_USER: 'smkt'
+            MYSQL_PASSWORD: 'Smkt@123'
+            MYSQL_ROOT_PASSWORD: 'password'
+        volumes: 
+            - sqlDBDataSnapshot:/var/lib/mysql
+    eureka:
+        image: antonioalejandro01/smkt-eureka:dev
+        container_name: smkt-eureka
+        environment:
+            PORT: 8761
+        ports: 
+            - "8761:8761"
+    gateway:
+        image: antonioalejandro01/smkt-gateway:snapshot
+        container_name: smkt-gateway
+        environment:
+            PORT: 8090
+            EUREKA_URL: http://eureka:8761/eureka
+        ports: 
+            - "8090:8090"
+    files:
+        image: antonioalejandro01/smkt-files:snapshot
+        container_name: smkt-files
+        environment:
+            PORT: 4050
+            EUREKA_URL: http://eureka:8761/eureka 
+        ports:
+            - "4050:4050"
+        depends_on:
+            - gateway
+    auth:
+        image: antonioalejandro01/smkt-oauth:snapshot
+        container_name: smkt-oauth
+        depends_on: 
+            - gateway
+        environment:
+            PORT: 9100
+            EUREKA_URL: http://eureka:8761/eureka
+        ports: 
+            - "9100:9100"
+    users:
+        image: antonioalejandro01/smkt-users:snapshot
+        container_name: smkt-users
+        environment:
+            PORT: 4060
+            EUREKA_URL: http://eureka:8761/eureka
+            DATASOURCE_URL: jdbc:mysql://mysqlDB:3306/SMKT_USERS
+            DATASOURCE_USER: smkt
+            DATASOURCE_PASSWORD: Smkt@123
+        ports: 
+            - "4060:4060"
+    pantry:
+        image: antonioalejandro01/smkt-pantry:snapshot
+        container_name: smkt-pantry
+        depends_on: 
+            - gateway
+        environment:
+            PORT: 4070
+            EUREKA_URL: http://eureka:8761/eureka
+            DB_NAME: smkt
+            DB_CONNECTION: mongodb://root:secret@mongoDB:27017/
+        ports: 
+            - "4070:4070"
+    cookbook:
+        image: antonioalejandro01/smkt-cookbook:snapshot
+        container_name: smkt-cookbook
+        environment:
+            PORT: 4080
+            EUREKA_URL: http://eureka:8761/eureka
+            DB_NAME: smkt
+            DB_COLLECTION: recipes
+            DB_CONNECTION: mongodb://root:secret@mongoDB:27017/
+        ports: 
+            - "4080:4080"
+volumes:
+    sqlDBDataSnapshot:
+    mongoDBDataSnapshot:
