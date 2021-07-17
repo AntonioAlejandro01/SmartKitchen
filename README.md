@@ -1,25 +1,46 @@
-# SmartKitchen #DEPRECATED
+# SmartKitchen
 
-#### Download docker-compose.yml for microservices
+#### Download docker-compose.yml DEV
+
 ```bash
-curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/master/docker-compose.yml -o ./docker-compose.yml
+curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/master/dev/docker-compose.yml -o ./docker-compose.yml
 ```
-#### Run microservices
+
+#### Download docker-compose.yml SNAPSHOT
+
+```bash
+curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/master/snapshot/docker-compose.yml -o ./docker-compose.yml
+```
+
+#### Download docker-compose.yml LATEST
+
+```bash
+curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/master/version/latest/docker-compose.yml -o ./docker-compose.yml
+```
+
+#### Download docker-compose.yml Specific Version
+
+```bash
+curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/master/version/1.0.0/docker-compose.yml -o ./docker-compose.yml
+```
+
+#### Run
+
 ```bash
 docker-compose up -d
 ```
-#### Run Frontend
-```bash
-docker run -p"80:80" -t antonioalejandro01/smktf-kitchen:1
-```
-<b>Docker and docker-compose is neccesary</b>
 
-## Microservices
+#### Download and run
+
+```bash
+curl https://raw.githubusercontent.com/AntonioAlejandro01/SmartKitchen/master/version/1.0.0/docker-compose.yml -o ./docker-compose.yml | docker-compose up -d
+```
+
+## Services
 - [SMKT_Eureka](https://github.com/AntonioAlejandro01/SMKT_Eureka)
 - [SMKT_Gateway](https://github.com/AntonioAlejandro01/SMKT_Gateway)
 - [SMKT_Oauth](https://github.com/AntonioAlejandro01/SMKT_Oauth)
 - [SMKT_Files](https://github.com/AntonioAlejandro01/SMKT_Files)
-- [SMKT_Kitchen](https://github.com/AntonioAlejandro01/SMKT_Kitchen)
+- [SMKT_Pantry](https://github.com/AntonioAlejandro01/SMKT_Pantry)
+- [SMKT_Cookbook](https://github.com/AntonioAlejandro01/SMKT_Cookbook)
 - [SMKT_Users](https://github.com/AntonioAlejandro01/SMKT_Users)
-## Frontend
-- [SMKTF_Kitchen](https://github.com/AntonioAlejandro01/SMKTF_Kitchen)
